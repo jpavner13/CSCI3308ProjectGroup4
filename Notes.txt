@@ -1,1 +1,11 @@
-File for taking notes.
+/*
+    Team #016-04
+    Team Name: "int team = 4;"
+    Team Members:
+        Name             Github         Email
+        Pierce Avner     jpavner13      jaav7964@colorado.edu
+        Keith Bliss      keithbliss     keith.bliss@colorado.edu
+        Juno Park        JunoPark-01    JunoPark-01@colorado.edu
+        Nick O'Connor    nick0connor    nioc4468@colorado.edu
+        Jithin Renji     jithinrenji    jithin.renji@colorado.edu
+*/
