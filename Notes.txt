@@ -9,3 +9,23 @@
         Nick O'Connor    nick0connor    nioc4468@colorado.edu
         Jithin Renji     jithinrenji    jithin.renji@colorado.edu
 */
+
+
+Ideas:
+    1. Rip off Reddit
+    2. Rip off FarmersOnly.com
+    3. Meet the locals
+
+
+Application Name: LocalZonely.com
+
+Application Description: 
+    We want to create a website that connects users (travelers) with locals of a given city. From there, they can chat/meet to talk about
+the area and things that a local reccomends to do while traveling to their city.
+
+Vision Statement:
+    A website for travelers that connects them with locals to make the most of their trip.
+
+Communication Plan: Discord
+
+Meeting time: Tuesdays @ 10AM
