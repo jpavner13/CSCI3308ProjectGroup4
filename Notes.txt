@@ -20,8 +20,15 @@ Ideas:
 Application Name: LocalZonely.com
 
 Application Description: 
-    We want to create a website that connects users (travelers) with locals of a given city. From there, they can chat/meet to talk about
-the area and things that a local reccomends to do while traveling to their city.
+        We want to create a website that connects users (travelers) with locals of a given city. The purpose of this application is to allow travelers to get
+    travel advice from local residents of a given city in order to make the most of their travel expirience. Locals know the best attractions in their areas
+    and often times they also know the places that cant be easily found online. By connecting travelers with these locals, they can find the places and
+    expirience travel to a whole different level.
+        Our website will have accounts where everyone is both a traveler and a local. You will be able to filter through users by location and send message
+    requests wich will then connect you to the desired local in that city. From there you will be able to chat with them to talk about your travel plans and hear
+    a locals advice. When an account is created, it allows you to log in and contact other users, and it also allows users to contact you. People who are traveleing
+    to your area will also be able to message you to ask for your favorite things to do in your city. Our website will alow travelers to fully expirience a destination
+    to it's fullest.
 
 Vision Statement:
     A website for travelers that connects them with locals to make the most of their trip.
