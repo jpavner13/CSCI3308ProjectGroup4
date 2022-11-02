@@ -1,0 +1,20 @@
+Talked through the meeting deliverables for future TA meetings
+Brief overview of the weekly schedule breakdown
+Talking about what our project is
+First looking at wireframes
+Nikita thinks the wireframes look good and are totally doable
+Showed project board but haven’t added anything to it yet
+This week’s lab is about test cases - start thinking about what cases we need for our project
+Make sure the whole team is on the same page before lab
+We should convert each wireframe page into an epic, then add subitems that need to be done for each
+Look for an external API that could import reviews (trivago, TripAdvisor, etc…)
+Use case diagram looks good
+Make sure we upload all the files to GitHub
+Take meeting minutes even for meetings without the TA
+
+Action items from today:
+1. Populate the project board
+2. Look for external APIs
+3. Everybody review the wireframes and agree on them
+
+Mentioned that we haven’t contacted Caleb yet - Nikita is going to try and get a hold of him
