@@ -80,6 +80,39 @@ app.get('/login', (req, res)=>{
     res.render('pages/login.ejs');
 });
 
+app.post('/login', async (req, res)=>{
+
+    const query = `SELECT * FROM users WHERE username = $1;`
+    db.any(query, [username])
+
+    // Successfully found a matching username
+    .then(async function(data){
+
+        // Hash the new password and see if they match
+        // req.body.password is straight from the EJS file, data[0].password stores the hashed password in the db
+        const match = await bcrypt.compare(req.body.password, `${data[0].password}`);
+
+        if(match == true){
+            req.session.user = {
+                api_key: process.env.API_KEY,
+            };
+            req.session.save();
+            res.redirect('/home'); // Redirect to the home page upon match
+        }
+        else{
+            console.log('Incorrect username or password')
+            res.redirect('/login'); // Redirect to the login page if credentials are wrong
+        }
+
+    })
+
+    // If the query failed redirect back to the login
+    .catch(function (err){
+        res.redirect('/login');
+        return console.log(err);
+    });
+});
+
 
 /* HOME */
 
