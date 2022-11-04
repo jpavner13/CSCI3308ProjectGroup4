@@ -1,6 +1,7 @@
 // importing the dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
+const { as } = require('pg-promise');
 
 // defining the Express app
 const app = express();
@@ -31,7 +32,48 @@ db.connect()
     console.log('ERROR:', error.message || error);
 });
 
-
 app.listen(3000);
 console.log('Server is listening on port 3000');
 
+
+// Redirect to login if no page specified
+app.get('/', (req, res)=>{
+    res.redirect('/login');
+});
+
+
+/* REGISTER */
+
+app.get('/register', (req, res) => {
+    res.render('pages/register.ejs');
+});
+
+app.post('/register', async (req, res)=>{
+    // TO DO
+});
+
+
+/* LOGIN */
+
+app.get('/login', (req, res)=>{
+    res.render('pages/login.ejs');
+});
+
+
+/* HOME */
+
+app.get('/home', (req, res)=>{
+    res.render('pages/home.ejs');
+});
+
+
+/* LOGOUT */
+
+// Destroy user session and redirect to a new page
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+
+    // login.ejs can be changed to a landing page later
+    res.render('pages/login.ejs') 
+    console.log('Logged out!')
+});
