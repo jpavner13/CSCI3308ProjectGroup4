@@ -114,6 +114,20 @@ app.post('/login', async (req, res)=>{
 });
 
 
+/* AUTHENTICATION MIDDLEWARE */
+
+const auth = (req, res, next) => {
+    if (!req.session.user) {
+        // Default to register page.
+        return res.redirect('/register');
+    }
+    next();
+};
+
+// Authentication Required
+app.use(auth);
+
+
 /* HOME */
 
 app.get('/home', (req, res)=>{
