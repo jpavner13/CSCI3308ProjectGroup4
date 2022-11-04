@@ -1,0 +1,35 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/menu') %>
+
+<main>
+  <div class="container">
+    <!-- THE REST OF YOUR HTML CODE GOES HERE -->
+    <% if (locals.message) { %>
+        <div
+          class="alert alert-<%- locals.error ? 'danger' : 'success' %>"
+          role="alert"
+        >
+          <%= message %>
+        </div>
+    <% } %>
+    
+    <form action = "/search" method = "POST">
+        <div class = "mb-3">
+            <label for = "Username" class = "form-label">Where are you traveling?</label>
+            <input type = "text" class = "form-control" name = "location" id = "location"/>
+        </div>
+        <button type = "submit" class = "btn btn-primary">Find locals</button>
+    </form>
+  </div>
+
+  <div class="containter">
+    <title>Your connections</title>
+    
+  </div>
+
+
+
+  
+</main>
+
+<%- include ('../partials/footer') %>
