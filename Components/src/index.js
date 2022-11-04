@@ -3,6 +3,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { as } = require('pg-promise');
 
+// Added from Lab 9
+const bcrypt = require('bcrypt');
+const axios = require('axios');
+const session = require('express-session');
+const { query } = require('express');
+
 // defining the Express app
 const app = express();
 
@@ -49,7 +55,22 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', async (req, res)=>{
-    // TO DO
+    // Hash the password -- Can this be done before being sent to server?
+    var hash = await bcrypt.hash(req.body.password, 10);
+
+    const query = `INSERT INTO users (username, password) VALUES ($1, $2);`
+    db.any(query, [req.body.username, hash])
+
+    // Username/Password were successfully input into the tables
+    .then(function(data){
+        res.redirect('/login')
+    })
+
+    // The information failed to be input into the SQL file
+    .catch(function(err){
+        res.redirect('/register');
+        return console.log(err);
+    })
 });
 
 
