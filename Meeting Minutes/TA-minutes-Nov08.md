@@ -25,3 +25,20 @@ November 8, 2022 TA Meeting
   - Not being able to see others' progress quickly (due to remote work)  
 
 ---
+
+- By next meeting have everything functional  
+- Make sure we use the project board effectively  
+  - Add all tasks to board after we meet  
+  - Make sure everything is assigned and in the right status  
+- Add release notes every week *before* the TA meeting  
+  - Summary of everything thats been done/been changed in the past week 
+- Work a little more this week to pick up the pace (other teams are ahead) 
+
+
+## To-Dos:
+
+- Make database  
+- Have significant progress on login/register/home pages  
+- Make sure we have no compilation/syntax errors before Thursday (for deployment)  
+- Pick up the pace a bit  
+- Create tasks on the project board  
