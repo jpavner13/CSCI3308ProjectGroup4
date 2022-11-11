@@ -23,7 +23,7 @@ const dbConfig = {
   port: 5432,
   database: process.env.POSTGRES_DB,
   user: process.env.POSTGRES_USER,
-  passord: process.env.POSTGRES_PASSWORD,
+  password: process.env.POSTGRES_PASSWORD,
 };
   
 const db = pgp(dbConfig);
