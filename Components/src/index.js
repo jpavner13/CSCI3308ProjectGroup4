@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const { as } = require('pg-promise');
 
 // Added from Lab 9
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const axios = require('axios');
 const session = require('express-session');
 const { query } = require('express');
