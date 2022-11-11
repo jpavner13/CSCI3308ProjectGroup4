@@ -1,9 +1,15 @@
-<%- include ('../partials/header') %> <%- include ('../partials/menu') %>
+<%- include ('../partials/header') %>
 
 <main>
     <div class="container">
         <h1>Account Registration</h1>
-        <form action="/login" method="POST">
+
+        <div class="row">
+        <div class="col">
+            <img src="..." class="img-fluid" alt="Welcome Image">
+        </div>
+        <div class="col">
+        <form action="/register" method="POST">
             <div class="mb-3">
                 <label for="firstname" class="form-label">First Name</label>
                 <input type="text" name="firstname" class="form-control" id="firstname" aria-describedby="firstnamehelp">
@@ -26,15 +32,22 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="text" name="password" class="form-control" id="password" aria-describedby="passwordhelp">
+                <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordhelp">
                 <div id="passwordhelp" class="form-text">Create a strong password.</div>
             </div>
             <button type="submit" class="btn btn-primary">Register me!</button>
         </form>
-        <div class="container">
-            <p>Already have an account?</p>
-            <a href="../pages/login.ejs">Login instead</a>
         </div>
+        </div>
+
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <p>Already have an account?</p>
+                <a href="/login">Login instead</a>
+            </div>
+        </div>
+            
     </div>
 </main>
 
