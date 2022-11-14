@@ -38,6 +38,22 @@ db.connect()
   console.log('ERROR:', error.message || error);
 });
 
+// From Lab 8
+// set the view engine to ejs
+app.set("view engine", "ejs");
+app.use(bodyParser.json());
+
+// From Piazza (get req.session.user to work)
+// TODO - learn what these values mean
+// set session
+app.use(
+  session({ 
+    secret: "XASDASDA",
+    saveUninitialized: false, 
+    resave: false, 
+  }) 
+);
+
 app.listen(3000);
 console.log('Server is listening on port 3000');
 
@@ -100,23 +116,30 @@ app.post('/login', async (req, res)=>{
   db.any(query, [req.body.username])
 
   // Successfully found a matching username
-  .then(async function(data){
+  .then(async (data)=>{
+    // Get the information from the first element of the db return
+    data = data[0]
 
     // TODO - Hash the new password and see if they match
     // req.body.password is straight from the EJS file, data[0].password stores the hashed password in the db
     // const match = await bcrypt.compare(req.body.password, `${data[0].password}`);
     
-    match = await (data[0].password == req.body.password); // temp info
+    match = await (data.password == req.body.password); // temp info
 
     if(match == true){
       console.log("Successfully matched password!");
 
-      // TODO - user is throwing errors - "TypeError: Cannot set properties of undefined (setting 'user')"
+      console.log([data.user_id, data.username, data.email, data.location_id, data.firstname, data.lastname])
       req.session.user = {
-        api_key: process.env.API_KEY,
+        user_id: data.user_id,
+        username: data.username,
+        email: data.email,
+        location: data.location_id,
+        firstname: data.firstname,
+        lastname: data.lastname
       };
-      
       req.session.save();
+
       res.redirect('/home'); // Redirect to the home page upon match
     }
     else{
@@ -129,7 +152,7 @@ app.post('/login', async (req, res)=>{
   // If the query failed redirect back to the login
   .catch(function (err){
     res.redirect('/login');
-    return console.log(err);
+    return console.log('Incorrect username or password');
   });
 });
 
