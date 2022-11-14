@@ -56,18 +56,32 @@ app.get('/register', (req, res) => {
 
 app.post('/register', async (req, res)=>{
   // Hash the password -- Can this be done before being sent to server?
-  var hash = await bcrypt.hash(req.body.password, 10);
+  // var hash = await bcrypt.hash(req.body.password, 10);
 
-  const query = `INSERT INTO users (username, password) VALUES ($1, $2);`
-  db.any(query, [req.body.username, hash])
+  // TODO - hash the password before storing
+  // TODO - make sure values arent null on arrival (have the required tag in the EJS)
+  var firstName = req.body.firstname;
+  var lastName = req.body.lastname;
+  var email = req.body.email;
+  var username = req.body.username;
+  var password = req.body.password;
+  var location = 1; // temp value
+
+
+  // TODO - Get location_id before storing it in the query
+  const query = `INSERT INTO users (username, password, firstname, lastname, email, location_id) VALUES ($1, $2, $3, $4, $5, $6);`
+  db.any(query, [username, password, firstName, lastName, email, location])
 
   // Username/Password were successfully input into the tables
   .then(function(data){
+    res.status(200)
+    console.log("Successfully Added Data!")
     res.redirect('/login')
   })
 
   // The information failed to be input into the SQL file
   .catch(function(err){
+    res.status(400)
     res.redirect('/register');
     return console.log(err);
   })
@@ -83,19 +97,25 @@ app.get('/login', (req, res)=>{
 app.post('/login', async (req, res)=>{
 
   const query = `SELECT * FROM users WHERE username = $1;`
-  db.any(query, [username])
+  db.any(query, [req.body.username])
 
   // Successfully found a matching username
   .then(async function(data){
 
-    // Hash the new password and see if they match
+    // TODO - Hash the new password and see if they match
     // req.body.password is straight from the EJS file, data[0].password stores the hashed password in the db
-    const match = await bcrypt.compare(req.body.password, `${data[0].password}`);
+    // const match = await bcrypt.compare(req.body.password, `${data[0].password}`);
+    
+    match = await (data[0].password == req.body.password); // temp info
 
     if(match == true){
+      console.log("Successfully matched password!");
+
+      // TODO - user is throwing errors - "TypeError: Cannot set properties of undefined (setting 'user')"
       req.session.user = {
         api_key: process.env.API_KEY,
       };
+      
       req.session.save();
       res.redirect('/home'); // Redirect to the home page upon match
     }
@@ -113,6 +133,15 @@ app.post('/login', async (req, res)=>{
   });
 });
 
+
+/* DEBUG CODE */
+app.get('/debug', (req, res)=>{
+  db.any("SELECT * FROM users;")
+  .then(function(data){
+    console.log(data);
+    res.send(data);
+  })
+});
 
 /* AUTHENTICATION MIDDLEWARE */
 
