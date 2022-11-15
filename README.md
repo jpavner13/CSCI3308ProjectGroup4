@@ -8,8 +8,8 @@ Group #4: LocalZonely
 
 ## Release Notes
 
-### V0.1 - November 10, 2022
+### v0.1 - November 10, 2022
 - Added login, register, and home pages  
 
-### V0.2 - 
+### v0.2 - 
 - 
