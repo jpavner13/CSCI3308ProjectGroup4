@@ -1,0 +1,20 @@
+<%- include ('../partials/header') %>
+<main>
+  <div class="container mx-0">
+    <h1 class="mb-5 mt-5">New Post</h1>
+    <form action="/new_post" method="post">
+      <div class="mb-3">
+        <input placeholder="Title" type="email" class="form-control">
+      </div>
+      <div class="mb-3">
+        <textarea placeholder="Description" class="form-control"></textarea>
+      </div>
+      <div class="mb-3">
+        <input placeholder="Image URL" type="text" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+  </div>
+</main>
+
+<%- include ('../partials/footer') %>

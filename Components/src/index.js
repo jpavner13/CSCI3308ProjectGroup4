@@ -134,6 +134,9 @@ app.get('/home', (req, res)=>{
   res.render('pages/home.ejs');
 });
 
+app.get('/new_post', (req, res) => {
+  res.render('pages/new_post.ejs');
+});
 
 /* LOGOUT */
 
