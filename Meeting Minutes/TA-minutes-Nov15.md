@@ -1,9 +1,9 @@
 
 # Meeting Minutes  
 
-CSCI 3308: Team 016-4
-November 15, 2022 TA Meeting
-*Prepared by: Keith Bliss*
+CSCI 3308: Team 016-4  
+November 15, 2022 TA Meeting  
+*Prepared by: Keith Bliss*  
 
 ---
 
