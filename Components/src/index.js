@@ -20,7 +20,6 @@ app.use(
   })
 );
 
-
 const pgp = require('pg-promise')();
 
 // database configuration
@@ -77,34 +76,43 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', async (req, res)=>{
-  // Hash the password -- Can this be done before being sent to server?
+  // TODO - Hash the password before inserting
   // var hash = await bcrypt.hash(req.body.password, 10);
+  
+  // Make the location a lowercase string
+  var location = `${req.body.location}`.toLowerCase()
 
-  console.log(req.body);
+  // Execute multiple db requests at once
+  db.task(t => {
 
-  // TODO - hash the password before storing
-  // TODO - make sure values arent null on arrival (have the required tag in the EJS)
-  var firstName = req.body.firstname;
-  var lastName = req.body.lastname;
-  var email = req.body.email;
-  var username = req.body.username;
-  var password = req.body.password;
-  var location = 1; // temp value
+    // Get the location_id from the input param first
+    return t.one(`SELECT location_id FROM locations WHERE loc_name = $1;`, [location])
 
+      // If the location_id pull was a success
+      .then(data => {
 
-  // TODO - Get location_id before storing it in the query
-  const query = `INSERT INTO users (username, password, firstname, lastname, email, location_id) VALUES ($1, $2, $3, $4, $5, $6);`
-  db.any(query, [username, password, firstName, lastName, email, location])
+        // Input the new user data into the db
+        var location_id = data.location_id
+        return t.any(`INSERT INTO users (username, password, firstname, lastname, email, location_id) VALUES ($1, $2, $3, $4, $5, $6);`,
+          [req.body.username, req.body.password, req.body.firstname, req.body.lastname, req.body.email, location_id])
 
-  // Username/Password were successfully input into the tables
-  .then(function(data){
+          // Inserting wasn't successful
+          .catch(err => {
+            res.redirect('/register');
+            return console.log(err);
+          })
+      })
+  })
+
+  // All db commands went through
+  .then(data => {
     res.status(200)
     console.log("Successfully Added Data!")
     res.redirect('/login')
   })
 
-  // The information failed to be input into the SQL file
-  .catch(function(err){
+  // Something went wrong somewhere
+  .catch(err => {
     res.status(400)
     res.redirect('/register');
     return console.log(err);
@@ -125,19 +133,19 @@ app.post('/login', async (req, res)=>{
 
   // Successfully found a matching username
   .then(async (data)=>{
+
     // Get the information from the first element of the db return
     data = data[0]
 
     // TODO - Hash the new password and see if they match
     // req.body.password is straight from the EJS file, data[0].password stores the hashed password in the db
     // const match = await bcrypt.compare(req.body.password, `${data[0].password}`);
-    
     match = await (data.password == req.body.password); // temp info
 
     if(match == true){
       console.log("Successfully matched password!");
 
-      console.log([data.user_id, data.username, data.email, data.location_id, data.firstname, data.lastname])
+      // Store the user data in the sessions.user variable
       req.session.user = {
         user_id: data.user_id,
         username: data.username,
