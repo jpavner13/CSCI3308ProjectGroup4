@@ -96,3 +96,9 @@ INSERT INTO locations (loc_name, country) VALUES
 ('west virginia', 'united states'),
 ('wisconsin', 'united states'),
 ('wyoming', 'united states');
+
+INSERT INTO users (username, password, firstname, lastname, email, location_id) VALUES
+('jpavner13', 'pierce', 'Pierce', 'Avner', 'jack.avner@colorado.edu', 6),
+('jithinrenji', 'jithin', 'Jithin', 'Renji', 'jithin.renji@colorado.edu', 6),
+('keithbliss', 'keith', 'Keith', 'Bliss', 'keith.bliss@colorado.edu', 5),
+('nick0connor', 'nick', 'Nick', 'OConnor', 'nick.oconnor@colorado.edu', 4);
