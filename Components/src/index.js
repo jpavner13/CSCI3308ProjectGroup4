@@ -188,11 +188,69 @@ app.get('/debug', (req, res)=>{
 // app.use(auth);
 
 
+
+
+
+
+
 /* HOME */
 
-app.get('/home', (req, res)=>{
-  res.render('pages/home.ejs');
+app.get('/home', async (req, res)=>{
+  const query = "SELECT * FROM users WHERE location_id = (SELECT location_id FROM locations WHERE loc_name = $1)";
+  //const query = "SELECT * FROM users;"
+  console.log(req.query.location);
+  // res.render("pages/home.ejs");
+  if(req.query.location != undefined) {
+    db.any(query, [
+      req.query.location
+    ])
+    .then((users) => {
+      console.log("trying to get data");
+      console.log(users); // the results will be displayed on the terminal if the docker containers are running
+      // Send some parameters
+      res.render("pages/home.ejs", {users});
+    })
+    .catch(error => {
+      // Handle errors
+      res.send("Error retrieving data"+ error);
+      console.log("Failed to get data");
+    })
+  }
+  else
+  {
+    res.render('pages/home.ejs')
+  }
+
+
 });
+
+app.get('/search', async (req, res)=>{
+  const query = "SELECT * FROM users WHERE location_id = (SELECT location_id FROM locations WHERE loc_name = $1)";
+  console.log(req.query.location);
+  if(req.query.location != undefined) {
+    db.one(query, [
+      req.query.location
+    ])
+    .then(async (users) => {
+      console.log("trying to get data");
+      console.log(users); // the results will be displayed on the terminal if the docker containers are running
+      // Send some parameters
+      res.render("pages/search.ejs", {users});
+    })
+    .catch(error => {
+      // Handle errors
+      res.send("Error retrieving data");
+      console.log("Failed to get data");
+    })
+  }
+});
+
+
+
+
+
+
+
 
 app.get('/new_post', (req, res) => {
   res.render('pages/new_post.ejs');
