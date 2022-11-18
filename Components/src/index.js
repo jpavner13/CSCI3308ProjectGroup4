@@ -91,7 +91,6 @@ app.post('/register', async (req, res)=>{
   var password = req.body.password;
   var location = 1; // temp value
 
-
   // TODO - Get location_id before storing it in the query
   const query = `INSERT INTO users (username, password, firstname, lastname, email, location_id) VALUES ($1, $2, $3, $4, $5, $6);`
   db.any(query, [username, password, firstName, lastName, email, location])
