@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const { as } = require('pg-promise');
 
 // Added from Lab 9
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs'); // Changed bcrypt to bcryptjs to avoid errors
 const axios = require('axios');
 const session = require('express-session');
 const { query } = require('express');
@@ -76,8 +76,9 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', async (req, res)=>{
-  // TODO - Hash the password before inserting
-  // var hash = await bcrypt.hash(req.body.password, 10);
+
+  // Hash the password before inserting
+  var hash = await bcrypt.hash(req.body.password, 10);
   
   // Make the location a lowercase string
   var location = `${req.body.location}`.toLowerCase()
@@ -94,7 +95,7 @@ app.post('/register', async (req, res)=>{
         // Input the new user data into the db
         var location_id = data.location_id
         return t.any(`INSERT INTO users (username, password, firstname, lastname, email, location_id) VALUES ($1, $2, $3, $4, $5, $6);`,
-          [req.body.username, req.body.password, req.body.firstname, req.body.lastname, req.body.email, location_id])
+          [req.body.username, hash, req.body.firstname, req.body.lastname, req.body.email, location_id])
 
           // Inserting wasn't successful
           .catch(err => {
@@ -137,10 +138,8 @@ app.post('/login', async (req, res)=>{
     // Get the information from the first element of the db return
     data = data[0]
 
-    // TODO - Hash the new password and see if they match
-    // req.body.password is straight from the EJS file, data[0].password stores the hashed password in the db
-    // const match = await bcrypt.compare(req.body.password, `${data[0].password}`);
-    match = await (data.password == req.body.password); // temp info
+    // req.body.password is straight from the EJS file, data.password stores the hashed password in the db
+    const match = await bcrypt.compare(req.body.password, `${data.password}`);
 
     if(match == true){
       console.log("Successfully matched password!");
