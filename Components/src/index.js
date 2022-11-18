@@ -14,6 +14,12 @@ const app = express();
 
 // using bodyParser to parse JSON in the request body into JS objects
 app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
 
 const pgp = require('pg-promise')();
 
@@ -73,6 +79,8 @@ app.get('/register', (req, res) => {
 app.post('/register', async (req, res)=>{
   // Hash the password -- Can this be done before being sent to server?
   // var hash = await bcrypt.hash(req.body.password, 10);
+
+  console.log(req.body);
 
   // TODO - hash the password before storing
   // TODO - make sure values arent null on arrival (have the required tag in the EJS)
