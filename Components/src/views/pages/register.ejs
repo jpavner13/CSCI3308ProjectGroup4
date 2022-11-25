@@ -4,45 +4,66 @@
 <div class="container mx-0">
 
   <div class="row">
-  
+
     <div class="col px-0">
-        <img class="vh-100 mx-0" alt="Welcome Image" src="https://images.unsplash.com/photo-1566895291281-ea63efd4bdbc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8OSUzQTE2fGVufDB8fDB8fA%3D%3D&w=1000&q=80">
+      <img class="vh-100 mx-0" alt="Welcome Image" src="https://images.unsplash.com/photo-1566895291281-ea63efd4bdbc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8OSUzQTE2fGVufDB8fDB8fA%3D%3D&w=1000&q=80">
     </div>
-    
+
     <div class="col mt-5">
-      
+
       <h1 class="mb-5 mt-5">Account Registration</h1>
-      
+
       <form action="/register" method="POST">
-      
-        <div class="mb-3">
-          <label for="firstname" class="form-label">First Name</label>
-          <input type="text" name="firstname" class="form-control" id="firstname" aria-describedby="firstnamehelp">
-          <div id="firstnamehelp" class="form-text">Enter your name.</div>
+
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <!-- <label for="firstname" class="form-label">First Name</label> -->
+              <input placeholder="First Name" type="text" name="firstname" class="form-control" id="firstname" aria-describedby="firstnamehelp" required>
+              <!-- <div id="firstnamehelp" class="form-text">Enter your name.</div> -->
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="mb-3">
+              <!-- <label for="lastname" class="form-label">Last Name</label> -->
+              <input placeholder="Last Name" type="text" name="lastname" class="form-control" id="lastname" aria-describedby="lastnamehelp" required>
+              <!-- <div id="lastnamehelp" class="form-text">Enter your name.</div> -->
+            </div>
+          </div>
         </div>
-      
-        <div class="mb-3">
-          <label for="lastname" class="form-label">Last Name</label>
-          <input type="text" name="lastname" class="form-control" id="lastname" aria-describedby="lastnamehelp">
-          <div id="lastnamehelp" class="form-text">Enter your name.</div>
+
+        <div class="row">
+          <div class="mb-3">
+            <!-- <label for="email" class="form-label">Email Address</label> -->
+            <input placeholder="Email Address" type="email" name="email" class="form-control" id="email" aria-describedby="emailhelp" required>
+            <!-- <div id="emailhelp" class="form-text">Enter a valid email address.</div> -->
+          </div>
         </div>
-      
-        <div class="mb-3">
-          <label for="email" class="form-label">Email Address</label>
-          <input type="email" name="email" class="form-control" id="email" aria-describedby="emailhelp">
-          <div id="emailhelp" class="form-text">Enter a valid email address.</div>
+
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <!-- <label for="username" class="form-label">Username</label> -->
+              <input placeholder="Username" type="text" name="username" class="form-control" id="username" aria-describedby="usernamehelp" required>
+              <!-- <div id="usernamehelp" class="form-text">Enter your new username.</div> -->
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="mb-3">
+              <!-- <label for="password" class="form-label">Password</label> -->
+              <input placeholder="Password" type="password" name="password" class="form-control" id="password" aria-describedby="passwordhelp" required>
+              <!-- <div id="passwordhelp" class="form-text">Create a strong password.</div> -->
+            </div>
+          </div>
+
         </div>
-      
+
         <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input type="text" name="username" class="form-control" id="username" aria-describedby="usernamehelp">
-          <div id="usernamehelp" class="form-text">Enter your new username.</div>
-        </div>
-      
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordhelp">
-          <div id="passwordhelp" class="form-text">Create a strong password.</div>
+          <!-- <label for="location" class="form-label">Your Location</label> -->
+          <input placeholder="Your Location" type="text" name="location" class="form-control" id="location" aria-describedby="locationhelp" required>
+          <!-- <div id="locationhelp" class="form-text">Where would you like to be a guide?</div> -->
         </div>
 
         <button type="submit" class="btn btn-primary">Register me!</button>
@@ -50,10 +71,13 @@
         <div class="mb-4">
           <span class="form-text">Already have an account? <a href="/login">Login.</a></span>
         </div>
+
       </form>
+
     </div>
+
   </div>
-        
+
 </div>
 
 <%- include ('../partials/footer') %>
