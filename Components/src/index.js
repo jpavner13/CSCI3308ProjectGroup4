@@ -215,9 +215,7 @@ app.get('/home', async (req, res)=>{
   console.log(req.query.location);
   // res.render("pages/home.ejs");
   if(req.query.location != undefined) {
-    db.any(query, [
-      req.query.location
-    ])
+    db.any(query, [req.query.location.toLowerCase()]) // lowercase the input since the db only has lowercase and we want Kansas = kansas
     .then((users) => {
       console.log("trying to get data");
       console.log(users); // the results will be displayed on the terminal if the docker containers are running
