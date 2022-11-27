@@ -15,6 +15,8 @@
 
       <form action="/register" method="POST">
 
+        <h5 class="">Required Information</h3>
+
         <div class="row">
           <div class="col">
             <div class="mb-3">
@@ -65,7 +67,30 @@
           <input placeholder="Your Location" type="text" name="location" class="form-control" id="location" aria-describedby="locationhelp" required>
           <!-- <div id="locationhelp" class="form-text">Where would you like to be a guide?</div> -->
         </div>
+        
+        <br>
+        <h5>Optional Information</h5>
 
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <input placeholder="000-000-0000" type="tel" name="phonenum" class="form-control" id="phone" aria-describedby="phonehelp" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="mb-3">
+              <input placeholder="@Twitter" type="text" name="twitter" class="form-control" id="twitter" aria-describedby="twitterhelp" pattern="@.{4,15}">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mb-3">
+          <input placeholder="Facebook Profile URL" type="url" name="facebook" class="form-control" id="facebook" aria-describedby="facebookhelp">
+        </div>
+
+        <br>
         <button type="submit" class="btn btn-primary">Register me!</button>
 
         <div class="mb-4">
