@@ -97,8 +97,10 @@ INSERT INTO locations (loc_name, country) VALUES
 ('wisconsin', 'united states'),
 ('wyoming', 'united states');
 
+-- Passwords are all first names all lowercase
+-- ie Nick's password is 'nick'
 INSERT INTO users (username, password, firstname, lastname, email, location_id) VALUES
-('jpavner13', 'pierce', 'Pierce', 'Avner', 'jack.avner@colorado.edu', 6),
-('jithinrenji', 'jithin', 'Jithin', 'Renji', 'jithin.renji@colorado.edu', 6),
-('keithbliss', 'keith', 'Keith', 'Bliss', 'keith.bliss@colorado.edu', 5),
-('nick0connor', 'nick', 'Nick', 'OConnor', 'nick.oconnor@colorado.edu', 4);
+('jpavner13', '$2a$10$rLMki1oS19Aalt8el5D3A.Nmz.NWXcdUmWCkiPkrR2A3Q9FlKjhse', 'Pierce', 'Avner', 'jack.avner@colorado.edu', 6),
+('jithinrenji', '$2a$10$rdxlxq6meP4Weu35WXOGv.ttbWRTbqlVovgshS1zGIO/vR1vpEZPS', 'Jithin', 'Renji', 'jithin.renji@colorado.edu', 6),
+('keithbliss', '$2a$10$7XFmWZsS6tbiqUVNmdGqtOLI9TqC42/WCAZY8SFe7K4YWTApR5Oem', 'Keith', 'Bliss', 'keith.bliss@colorado.edu', 5),
+('nick0connor', '$2a$10$.j4pqk3fykWZ0qcmk8CHbuJpovb9L2Bf4rb9V4DNQY2kwkS85LzHm', 'Nick', 'OConnor', 'nioc4468@colorado.edu', 25);
