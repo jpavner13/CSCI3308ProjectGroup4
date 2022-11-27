@@ -77,6 +77,11 @@ app.get('/register', (req, res) => {
 
 app.post('/register', async (req, res)=>{
 
+  // Take the optional user input data and either make it a correct value or null
+  var twitter = req.body.twitter ? req.body.twitter.replace('@','') : null;
+  var phoneNum = req.body.phonenum ? req.body.phonenum : null;
+  var facebook = req.body.facebook ? req.body.facebook : null;
+  
   // Hash the password before inserting
   var hash = await bcrypt.hash(req.body.password, 10);
   
@@ -94,8 +99,10 @@ app.post('/register', async (req, res)=>{
 
         // Input the new user data into the db
         var location_id = data.location_id
-        return t.any(`INSERT INTO users (username, password, firstname, lastname, email, location_id) VALUES ($1, $2, $3, $4, $5, $6);`,
-          [req.body.username, hash, req.body.firstname, req.body.lastname, req.body.email, location_id])
+        return t.any(`INSERT INTO users (username, password, firstname, lastname, 
+          email, phone_num, twitter, facebook_url, location_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`,
+          [req.body.username, hash, req.body.firstname, req.body.lastname, 
+          req.body.email, phoneNum, twitter, facebook, location_id])
 
           // Inserting wasn't successful
           .catch(err => {
