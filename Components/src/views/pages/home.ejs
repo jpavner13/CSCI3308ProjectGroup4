@@ -25,13 +25,7 @@
     text-align: center;
     }
     header .header-1{
-    background-image: repeating-radial-gradient(farthest-side at 5px 5px,#553c9a, #ee4b2b, #553c9a);
-    }
-    header .header-2{
-    background-image: repeating-radial-gradient(farthest-corner at 20px 40px,#553c9a, #ee4b2b, #553c9a);
-    }
-    header .header-3{
-    background-image: repeating-radial-gradient(circle farthest-side at 5px 10px,#553c9a 10%, #ee4b2b 30%, #553c9a);
+    background-image: repeating-radial-gradient(farthest-side at 5px 5px,#7442ff, #2169ba, #158ddd);
     }
 </style>
 
@@ -187,27 +181,29 @@
   </div>
   <div>
         <% if (locals.users != undefined) { %>
-            <div class="row">
-                <% users.forEach( user => { %>
-                    <div class="col-md-4">
-                        <div class="card profile-card-3">
-                            <div class="background-block">
-                                <img src="https://images.unsplash.com/photo-1566895291281-ea63efd4bdbc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8OSUzQTE2fGVufDB8fDB8fA%3D%3D&w=1000&q=80" class="cropped2"/>
-                            </div>
-                            <div class="profile-thumb-block">
-                                <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="profile-image" class="profile"/>
-                            </div>
-                            <div class="card-content">
-                            <h2><%= user.username %><small><%= user.email %></small></h3>
-                            <div class="icon-block"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"> <i class="fa fa-twitter"></i></a><a href="#"> <i class="fa fa-google-plus"></i></a></div>
+            <div class="container" margin="auto">
+                <div class="row" margin="10px">
+                    <% users.forEach( user => { %>
+                        <div class="col-md-4">
+                            <div class="card profile-card-3">
+                                <div class="background-block">
+                                    <img src="https://images.unsplash.com/photo-1566895291281-ea63efd4bdbc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8OSUzQTE2fGVufDB8fDB8fA%3D%3D&w=1000&q=80" class="cropped2"/>
+                                </div>
+                                <div class="profile-thumb-block">
+                                    <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="profile-image" class="profile"/>
+                                </div>
+                                <div class="card-content">
+                                <h2><%= user.username %><small><%= user.email %></small></h3>
+                                <div class="icon-block"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"> <i class="fa fa-twitter"></i></a><a href="#"> <i class="fa fa-google-plus"></i></a></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- <tr>
-                        <td><%= user.username %></td>
-                    </tr> -->
-                <% }) %>
+    
+                        <!-- <tr>
+                            <td><%= user.username %></td>
+                        </tr> -->
+                    <% }) %>
+                </div>
             </div>
         <% } %> 
     </div>
