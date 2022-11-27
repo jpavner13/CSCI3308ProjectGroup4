@@ -10,9 +10,12 @@ CREATE TABLE users(
   user_id SERIAL PRIMARY KEY NOT NULL,
   username VARCHAR(50) NOT NULL,
   password VARCHAR(60) NOT NULL,
-  firstname VARCHAR(20),
-  lastname VARCHAR(20),
-  email VARCHAR(30),
+  firstname VARCHAR(30) NOT NULL,
+  lastname VARCHAR(30) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  phone_num VARCHAR(12),
+  twitter VARCHAR(15),
+  facebook_url VARCHAR(100),
   location_id INTEGER NOT NULL REFERENCES locations (location_id)
 );
 
