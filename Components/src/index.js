@@ -255,9 +255,57 @@ app.get('/search', async (req, res)=>{
 });
 
 
+/* USER */
 
+app.get('/user/:user_id', (req, res) => {
+  var curUserID = req.params.user_id
 
+  db.any(`SELECT * FROM users WHERE username = (SELECT username FROM users WHERE user_id = $1);`, [curUserID])
+  .then(returnUser => {
+    returnUser = returnUser[0]
 
+    console.log({
+      returnUser,
+      match: returnUser.user_id==req.session.user.user_id,
+    })
+
+    res.render("pages/users.ejs", {
+      returnUser,
+      match: returnUser.user_id==req.session.user.user_id,
+      noData: false
+    });
+    
+  })
+  .catch(err =>{
+    res.render("pages/users.ejs", {noData: true})
+  })
+})
+
+app.post('/user/', (req, res) => {
+  
+  // Take the optional user input data and either make it a correct value or null
+  var twitter = req.body.twitter ? req.body.twitter.replace('@','') : null;
+  var phoneNum = req.body.phonenum ? req.body.phonenum : null;
+  var facebook = req.body.facebook ? req.body.facebook : null;
+
+  const query = `UPDATE users SET 
+  username = $1, firstname = $2, lastname = $3, email = $4, phone_num = $5, twitter = $6, facebook_url = $7
+  WHERE user_id = $8;`
+
+  db.any(query, [
+    req.body.username, req.body.firstname, req.body.lastname, req.body.email, phoneNum, twitter, facebook, req.session.user.user_id
+  ])
+
+  .then(data => {
+    res.redirect("/home")
+  })
+
+  .catch(err => {
+    console.log(err);
+    res.redirect(`/user/${req.session.user.user_id}`)
+  })
+
+})
 
 
 
