@@ -188,22 +188,19 @@ app.get('/debug', (req, res)=>{
   })
 });
 
+
 /* AUTHENTICATION MIDDLEWARE */
 
-// const auth = (req, res, next) => {
-//   if (!req.session.user) {
-//     // Default to register page.
-//     return res.redirect('/register');
-//   }
-//   next();
-// };
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    // Default to register page.
+    return res.redirect('/login');
+  }
+  next();
+};
 
 // Authentication Required
-// app.use(auth);
-
-
-
-
+app.use(auth);
 
 
 
