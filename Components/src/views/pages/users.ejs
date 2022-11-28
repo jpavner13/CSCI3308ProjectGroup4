@@ -1,0 +1,260 @@
+<%- include ('../partials/menu') %>
+<%- include ('../partials/header') %>
+
+
+<div class="container mx-0">
+  <div class="row">
+    <div class="col px-0">
+      <img class="vh-100 mx-0" src="https://images.unsplash.com/photo-1566895291281-ea63efd4bdbc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8OSUzQTE2fGVufDB8fDB8fA%3D%3D&w=1000&q=80" />
+    </div>
+    
+    <div class="col mt-5">
+      
+      <!-- If there was an error getting the data -->
+      <% if(noData){ %> 
+
+        <h1 class="mb-5 mt-5">User Data Not Found</h1>
+        
+        <a href="../home"><button class="btn btn-primary">Return Home</button></a>
+
+      <!-- Got the user data -->
+      <% } else { %>
+
+        <!-- If this is your own data -->
+        <% if(match){ %>
+          <h1 class="mb-5 mt-5">Edit Data</h1>
+
+          <form action="/user" method="POST">
+
+            <!-- Username -->
+            <div class="row">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="username">Username: </label>
+                </div>
+              </div>
+    
+              <div class="col-9">
+                <div class="mb-3">
+                  <input type="text" name="username" class="form-control" id="username" value=<%= returnUser.username %> required>
+                </div>
+              </div>
+            </div>
+
+            <!-- First Name -->
+            <div class="row">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="firstname">First Name: </label>
+                </div>
+              </div>
+    
+              <div class="col-9">
+                <div class="mb-3">
+                  <input type="text" name="firstname" class="form-control" id="firstname" value=<%= returnUser.firstname %> required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="row">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="lastname">Last Name: </label>
+                </div>
+              </div>
+    
+              <div class="col-9">
+                <div class="mb-3">
+                  <input type="text" name="lastname" class="form-control" id="lastname" value=<%= returnUser.lastname %> required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="email">Email: </label>
+                </div>
+              </div>
+    
+              <div class="col-9">
+                <div class="mb-3">
+                  <input type="email" name="email" class="form-control" id="email" value=<%= returnUser.email %> required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="row">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="phonenum">Phone Number: </label>
+                </div>
+              </div>
+    
+              <div class="col-9">
+                <div class="mb-3">
+                  <input type="text" name="phonenum" class="form-control" id="phonenum" placeholder="000-000-0000" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value=<%= returnUser.phone_num %>>
+                </div>
+              </div>
+            </div>
+
+            <!-- Twitter -->
+            <div class="row">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="twitter">Twitter @: </label>
+                </div>
+              </div>
+    
+              <div class="col-9">
+                <div class="mb-3">
+                  <input type="text" name="twitter" class="form-control" id="twitter" placeholder="@Twitter" pattern="@.{4,15}" value=<%= returnUser.twitter==null?"":`@${returnUser.twitter}` %>>
+                </div>
+              </div>
+            </div>
+
+            <!-- Facebook -->
+            <div class="row">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="facebook">Facebook URL: </label>
+                </div>
+              </div>
+    
+              <div class="col-9">
+                <div class="mb-3">
+                  <input type="url" name="facebook" class="form-control" id="facebook" value=<%= returnUser.facebook_url %>>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Information</button>
+
+          </form>
+
+        <!-- If this isn't your own data -->
+        <% } else { %> 
+
+          <h1 class="mb-5 mt-5">User Data</h1>
+
+          <!-- Username -->
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="username">Username: </label>
+              </div>
+            </div>
+  
+            <div class="col-9">
+              <div class="mb-3">
+                <input readonly type="text" name="username" class="form-control" id="username" value=<%= returnUser.username %> required>
+              </div>
+            </div>
+          </div>
+
+          <!-- First Name -->
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="firstname">First Name: </label>
+              </div>
+            </div>
+  
+            <div class="col-9">
+              <div class="mb-3">
+                <input readonly type="text" name="firstname" class="form-control" id="firstname" value=<%= returnUser.firstname %> required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Last Name -->
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="lastname">Last Name: </label>
+              </div>
+            </div>
+  
+            <div class="col-9">
+              <div class="mb-3">
+                <input readonly type="text" name="lastname" class="form-control" id="lastname" value=<%= returnUser.lastname %> required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="email">Email: </label>
+              </div>
+            </div>
+  
+            <div class="col-9">
+              <div class="mb-3">
+                <input readonly type="email" name="email" class="form-control" id="email" value=<%= returnUser.email %> required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="phonenum">Phone Number: </label>
+              </div>
+            </div>
+  
+            <div class="col-9">
+              <div class="mb-3">
+                <input readonly type="text" name="phonenum" class="form-control" id="phonenum" value=<%= returnUser.phone_num %>  >
+              </div>
+            </div>
+          </div>
+
+          <!-- Twitter -->
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="twitter">Twitter @: </label>
+              </div>
+            </div>
+  
+            <div class="col-9">
+              <div class="mb-3">
+                <input readonly type="text" name="twitter" class="form-control" id="twitter" value=<%= returnUser.twitter==null?"":`@${returnUser.twitter}`%>>
+              </div>
+            </div>
+          </div>
+
+          <!-- Facebook -->
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="facebook">Facebook URL: </label>
+              </div>
+            </div>
+  
+            <div class="col-9">
+              <div class="mb-3">
+                <input readonly type="url" name="facebook" class="form-control" id="facebook" value=<%= returnUser.facebook_url %>>
+              </div>
+            </div>
+          </div>
+
+          <a href="../home"><button class="btn btn-primary">Return Home</button></a>
+          
+        <% } %> 
+
+      <% } %>
+
+    </div>
+    
+  </div>
+</div>
+
+
+<%- include ('../partials/footer') %>
