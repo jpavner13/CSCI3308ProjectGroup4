@@ -170,7 +170,8 @@ app.post('/login', async (req, res)=>{
         lastname: data.lastname,
         phone_num: data.phone_num,
         twitter: data.twitter,
-        facebook_url: data.facebook_url
+        facebook_url: data.facebook_url,
+        profile_pic: data.profile_pic
       };
       req.session.save();
 
@@ -302,13 +303,14 @@ app.post('/user/', (req, res) => {
   var twitter = req.body.twitter ? req.body.twitter.replace('@','') : null;
   var phoneNum = req.body.phonenum ? req.body.phonenum : null;
   var facebook = req.body.facebook ? req.body.facebook : null;
+  var profile = req.body.pfp ? req.body.pfp : 'https://static1.housesforsale.com/v2.4.5/assets/img/unknown_user.png';
 
   const query = `UPDATE users SET 
-  username = $1, firstname = $2, lastname = $3, email = $4, phone_num = $5, twitter = $6, facebook_url = $7
-  WHERE user_id = $8;`
+  username = $1, firstname = $2, lastname = $3, email = $4, phone_num = $5, twitter = $6, facebook_url = $7, profile_pic = $8
+  WHERE user_id = $9;`
 
   db.any(query, [
-    req.body.username, req.body.firstname, req.body.lastname, req.body.email, phoneNum, twitter, facebook, req.session.user.user_id
+    req.body.username, req.body.firstname, req.body.lastname, req.body.email, phoneNum, twitter, facebook, profile, req.session.user.user_id
   ])
 
   .then(data => {
