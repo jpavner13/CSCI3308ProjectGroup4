@@ -162,7 +162,8 @@ app.post('/login', async (req, res)=>{
       };
       req.session.save();
 
-      res.redirect('/home'); // Redirect to the home page upon match
+      res.render('pages/home.ejs', {curUserID: req.session.user.user_id}); // Redirect to the home page upon match
+      return
     }
     else{
       console.log('Incorrect username or password')
@@ -223,7 +224,7 @@ app.get('/home', async (req, res)=>{
       console.log("trying to get data");
       console.log(users); // the results will be displayed on the terminal if the docker containers are running
       // Send some parameters
-      res.render("pages/home.ejs", {users});
+      res.render("pages/home.ejs", {users, curUserID: req.session.user.user_id});
     })
     .catch(error => {
       // Handle errors
@@ -233,7 +234,7 @@ app.get('/home', async (req, res)=>{
   }
   else
   {
-    res.render('pages/home.ejs')
+    res.render('pages/home.ejs', {curUserID: req.session.user.user_id})
   }
 
 
@@ -270,20 +271,16 @@ app.get('/user/:user_id', (req, res) => {
   .then(returnUser => {
     returnUser = returnUser[0]
 
-    console.log({
-      returnUser,
-      match: returnUser.user_id==req.session.user.user_id,
-    })
-
     res.render("pages/users.ejs", {
       returnUser,
       match: returnUser.user_id==req.session.user.user_id,
-      noData: false
+      noData: false,
+      curUserID: req.session.user.user_id
     });
     
   })
   .catch(err =>{
-    res.render("pages/users.ejs", {noData: true})
+    res.render("pages/users.ejs", {noData: true, curUserID: req.session.user.user_id})
   })
 })
 
@@ -303,12 +300,14 @@ app.post('/user/', (req, res) => {
   ])
 
   .then(data => {
-    res.redirect("/home")
+    res.render('pages/home.ejs', {curUserID: req.session.user.user_id})
+    return
   })
 
   .catch(err => {
     console.log(err);
-    res.redirect(`/user/${req.session.user.user_id}`)
+    res.render('pages/home.ejs', {curUserID: req.session.user.user_id})
+    return
   })
 
 })
