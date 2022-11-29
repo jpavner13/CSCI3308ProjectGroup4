@@ -18,4 +18,9 @@ Group #4: LocalZonely
 - Added tables into database to store locations
 - Created test data to use in future development  
 
-### v0.3 - 
+### v1.0 - November 29, 2022
+- Website now fully functional
+- Added error messages to all pages
+- Users can now create new posts which are added to the homepage
+- Homepage cards have been further developed
+- Users can now upload a profile picture which is displayed on posts
