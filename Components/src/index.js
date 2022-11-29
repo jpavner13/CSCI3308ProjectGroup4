@@ -374,6 +374,6 @@ app.get('/logout', (req, res) => {
   req.session.destroy();
 
   // login.ejs can be changed to a landing page later
-  res.render('pages/login.ejs') 
-  console.log('Logged out!')
+  res.render('pages/login.ejs');
+  console.log('Logged out!');
 });
