@@ -1,16 +1,27 @@
 <%- include ('../partials/header') %>
+<%- include ('../partials/menu') %>
 <main>
-  <div class="container mx-0">
+  <div class="container ml-5">
     <h1 class="mb-5 mt-5">New Post</h1>
     <form action="/new_post" method="post">
       <div class="mb-3">
-        <input placeholder="Title" type="email" class="form-control">
+        <input placeholder="Title" type="text" name="title" class="form-control" required>
       </div>
       <div class="mb-3">
-        <textarea placeholder="Description" class="form-control"></textarea>
+        <textarea placeholder="Description" name="description" class="form-control" rows=12></textarea>
       </div>
       <div class="mb-3">
-        <input placeholder="Image URL" type="text" class="form-control">
+        <input placeholder="Image URL" type="text" name="image_url" class="form-control">
+      </div>
+      <div class="mb-3">
+        <select name="rating" class="form-select form-control">
+          <option value="0" selected>Choose Rating</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
       </div>
       <button type="submit" class="btn btn-primary">Post</button>
     </form>
