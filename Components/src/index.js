@@ -106,7 +106,10 @@ app.post('/register', async (req, res)=>{
 
           // Inserting wasn't successful
           .catch(err => {
-            res.redirect('/register');
+            res.render('pages/register.ejs', {
+              message: 'Something went wrong. Please check that the data you inserted was correct and isn\'t too long.',
+              error: true
+            });
             return console.log(err);
           })
       })
@@ -122,7 +125,10 @@ app.post('/register', async (req, res)=>{
   // Something went wrong somewhere
   .catch(err => {
     res.status(400)
-    res.redirect('/register');
+    res.render('pages/register.ejs', {
+      message: 'Please enter a valid location (one of the 50 US states).',
+      error: true
+    });
     return console.log(err);
   })
 });
@@ -158,11 +164,15 @@ app.post('/login', async (req, res)=>{
         email: data.email,
         location: data.location_id,
         firstname: data.firstname,
-        lastname: data.lastname
+        lastname: data.lastname,
+        phone_num: data.phone_num,
+        twitter: data.twitter,
+        facebook_url: data.facebook_url
       };
       req.session.save();
 
-      res.redirect('/home'); // Redirect to the home page upon match
+      res.render('pages/home.ejs', {curUserID: req.session.user.user_id}); // Redirect to the home page upon match
+      return
     }
     else{
       console.log('Incorrect username or password')
@@ -223,7 +233,7 @@ app.get('/home', async (req, res)=>{
       console.log("trying to get data");
       console.log(users); // the results will be displayed on the terminal if the docker containers are running
       // Send some parameters
-      res.render("pages/home.ejs", {users});
+      res.render("pages/home.ejs", {users, curUserID: req.session.user.user_id});
     })
     .catch(error => {
       // Handle errors
@@ -233,7 +243,7 @@ app.get('/home', async (req, res)=>{
   }
   else
   {
-    res.render('pages/home.ejs')
+    res.render('pages/home.ejs', {curUserID: req.session.user.user_id})
   }
 
 
@@ -264,26 +274,22 @@ app.get('/search', async (req, res)=>{
 /* USER */
 
 app.get('/user/:user_id', (req, res) => {
-  var curUserID = req.params.user_id
+  var curUserID = req.params.user_id ? req.params.user_id:req.session.user.user_id;
 
   db.any(`SELECT * FROM users WHERE username = (SELECT username FROM users WHERE user_id = $1);`, [curUserID])
   .then(returnUser => {
     returnUser = returnUser[0]
 
-    console.log({
-      returnUser,
-      match: returnUser.user_id==req.session.user.user_id,
-    })
-
     res.render("pages/users.ejs", {
       returnUser,
       match: returnUser.user_id==req.session.user.user_id,
-      noData: false
+      noData: false,
+      curUserID: req.session.user.user_id
     });
     
   })
   .catch(err =>{
-    res.render("pages/users.ejs", {noData: true})
+    res.render("pages/users.ejs", {noData: true, curUserID: req.session.user.user_id})
   })
 })
 
@@ -303,12 +309,21 @@ app.post('/user/', (req, res) => {
   ])
 
   .then(data => {
-    res.redirect("/home")
+    res.render('pages/home.ejs', {curUserID: req.session.user.user_id})
+    return
   })
 
   .catch(err => {
     console.log(err);
-    res.redirect(`/user/${req.session.user.user_id}`)
+    res.render('pages/users.ejs', {
+      message: 'Bad Data Inserted',
+      error: true,
+      curUserID: req.session.user.user_id,
+      returnUser: req.session.user,
+      noData: false,
+      match: true
+    })
+    return
   })
 
 })
@@ -316,7 +331,7 @@ app.post('/user/', (req, res) => {
 
 
 app.get('/new_post', (req, res) => {
-  res.render('pages/new_post.ejs');
+  res.render('pages/new_post.ejs', {curUserID: req.session.user.user_id});
 });
 
 app.post('/new_post', (req, res) => {
@@ -338,13 +353,15 @@ app.post('/new_post', (req, res) => {
     ])
     .then(data => {
       res.render('pages/home', {
-        message: 'Posted successfully!'
+        message: 'Posted successfully!',
+        curUserID: req.session.user.user_id
       });
     })
     .catch(err => {
       res.render('pages/home', {
         message: 'Failed to post. Please try again.',
-        error: true
+        error: true,
+        curUserID: req.session.user.user_id
       });
       console.log(err);
     });

@@ -22,10 +22,16 @@
             <li class="nav-item">
               <!-- TO-DO: For Discover, add a <a> tag with an attribute href to call the '/discover' API -->
                 <div class="row">
-                  <a class="btn btn-primary" href="new_post" role="button">+ New Post</a>
+                  <a class="btn btn-primary" href="../new_post" role="button">+ New Post</a>
                 </div>
             </li>
           </ul>
+
+          <!-- An edit info button -->
+          <div class="nav-item me-1">
+            <a class="navbar-brand" href=<%= `../user/${curUserID}` %>>Edit Account Info</a>
+          </div>
+
           <div class="nav-item me-1">
             <!-- TO-DO: For Logout, add a <a> tag with an attribute href to call the '/logout API -->
                 <a class="navbar-brand" href="/logout">Logout</a>
