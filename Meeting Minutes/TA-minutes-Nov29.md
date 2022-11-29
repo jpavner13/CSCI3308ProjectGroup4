@@ -27,4 +27,11 @@ November 29, 2022 TA Meeting
 
 ## To-Dos:  
 
-- 
+- Submit slides in .pdf form by 11:59pm Wednesday night
+  - Challenges faced
+  - Tools used
+  - Site concept
+  - Architecture diagram: interaction between frontend, backend, and server (HTML/CSS/Bootstrap <-> JavaScript <-> PostGres)
+- Peer eval survey due 11:59pm Thursday night
+- Final report due 11:59pm Friday night
+  - Video included (record a screen-share of your demo)
