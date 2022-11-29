@@ -106,7 +106,10 @@ app.post('/register', async (req, res)=>{
 
           // Inserting wasn't successful
           .catch(err => {
-            res.redirect('/register');
+            res.render('pages/register.ejs', {
+              message: 'Something went wrong. Please check that the data you inserted was correct and isn\'t too long.',
+              error: true
+            });
             return console.log(err);
           })
       })
@@ -122,7 +125,10 @@ app.post('/register', async (req, res)=>{
   // Something went wrong somewhere
   .catch(err => {
     res.status(400)
-    res.redirect('/register');
+    res.render('pages/register.ejs', {
+      message: 'Please enter a valid location (one of the 50 US states).',
+      error: true
+    });
     return console.log(err);
   })
 });
@@ -158,7 +164,10 @@ app.post('/login', async (req, res)=>{
         email: data.email,
         location: data.location_id,
         firstname: data.firstname,
-        lastname: data.lastname
+        lastname: data.lastname,
+        phone_num: data.phone_num,
+        twitter: data.twitter,
+        facebook_url: data.facebook_url
       };
       req.session.save();
 
@@ -265,7 +274,7 @@ app.get('/search', async (req, res)=>{
 /* USER */
 
 app.get('/user/:user_id', (req, res) => {
-  var curUserID = req.params.user_id
+  var curUserID = req.params.user_id ? req.params.user_id:req.session.user.user_id;
 
   db.any(`SELECT * FROM users WHERE username = (SELECT username FROM users WHERE user_id = $1);`, [curUserID])
   .then(returnUser => {
@@ -306,7 +315,14 @@ app.post('/user/', (req, res) => {
 
   .catch(err => {
     console.log(err);
-    res.render('pages/home.ejs', {curUserID: req.session.user.user_id})
+    res.render('pages/users.ejs', {
+      message: 'Bad Data Inserted',
+      error: true,
+      curUserID: req.session.user.user_id,
+      returnUser: req.session.user,
+      noData: false,
+      match: true
+    })
     return
   })
 
