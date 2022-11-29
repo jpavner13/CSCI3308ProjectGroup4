@@ -178,12 +178,12 @@
   </div>
 
   <div>
-    <% if (locals.users != undefined) { %>
+    <% if (locals.data != undefined) { %>
 
       <div class="container" margin="auto">
         <div class="row" margin="10px">
 
-          <% users.forEach( user => { %>
+          <% data[0].forEach( user => { %>
             <div class="col-md-4">
               <div class="card profile-card-3">
 
@@ -226,8 +226,55 @@
         </div>
       </div>
 
-    <% } %> 
-  </div>
+      <div><h1></h1></div>
+
+        <div>
+            <div class="row">
+                <header>
+                    <h1 padding = "10px" class="header-1">Posts</h1>
+                </header>
+            </div>
+
+            <div class="container" margin="auto">
+                <div class="row" margin="10px">
+                    <% data[1].forEach( post => { %>
+                        <div class="col-md-4">
+                            <div class="card profile-card-3">
+            
+                            <div class="background-block">
+                                <img src="<%= post.image_url %>" style="object-fit:contain;
+                                height:300px;
+                                border: solid 1px #CCC"/>
+                            </div>
+            
+                            <div class="profile-thumb-block">
+                                <% data[0].forEach( user => { %>
+                                    <% if(post.user_id == user.user_id){ %>
+                                        <img src=<%= user.profile_pic %> alt="profile-image" class="profile" style="height: 100px; width: 100px;"/>
+                                    <% } %>
+                                <% }) %>
+                            </div>
+                            <div class="card-content">
+                                
+                                <% data[0].forEach( user => { %>
+                                    <% if(post.user_id == user.user_id){ %>
+                                        <h2><%= user.username %><small><%=post.title%></small><small>rating: <%=post.rating%></small><small><%=post.description%></small></h2>
+                                    <% } %>
+                                <% }) %>
+                                
+                            </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+
+            <% } %> 
+        </div>
 
 </main>
 

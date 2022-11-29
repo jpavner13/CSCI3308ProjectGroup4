@@ -227,17 +227,27 @@ app.use(auth);
 /* HOME */
 
 app.get('/home', async (req, res)=>{
-  const query = "SELECT * FROM users WHERE location_id = (SELECT location_id FROM locations WHERE loc_name = $1)";
-  //const query = "SELECT * FROM users;"
+  const query = "SELECT * FROM users WHERE location_id = (SELECT location_id FROM locations WHERE loc_name = $1);";
+  const query2 = "SELECT * FROM posts WHERE location_id = (SELECT location_id FROM locations WHERE loc_name = $1);";
   console.log(req.query.location);
-  // res.render("pages/home.ejs");
+
   if(req.query.location != undefined) {
-    db.any(query, [req.query.location.toLowerCase()]) // lowercase the input since the db only has lowercase and we want Kansas = kansas
-    .then((users) => {
+    db.task("get all", data => {
+      return data.batch([
+        data.any(query, req.query.location.toLowerCase()),
+        data.any(query2, req.query.location.toLowerCase())
+      ])
+    })
+    //db.any(query, query2, [req.query.location.toLowerCase()]) // lowercase the input since the db only has lowercase and we want Kansas = kansas
+    .then((data) => {
       console.log("trying to get data");
-      console.log(users); // the results will be displayed on the terminal if the docker containers are running
+      console.log(data[0]); // the results will be displayed on the terminal if the docker containers are running
+      console.log(data[1]);
       // Send some parameters
-      res.render("pages/home.ejs", {users, curUserID: req.session.user.user_id});
+      res.render("pages/home.ejs", {
+        data, 
+        curUserID: req.session.user.user_id
+      });
     })
     .catch(error => {
       // Handle errors
