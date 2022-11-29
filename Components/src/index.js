@@ -331,7 +331,40 @@ app.post('/user/', (req, res) => {
 
 
 app.get('/new_post', (req, res) => {
-  res.render('pages/new_post.ejs');
+  res.render('pages/new_post.ejs', {curUserID: req.session.user.user_id});
+});
+
+app.post('/new_post', (req, res) => {
+  var post_data = {
+    user_id: req.session.user.user_id,
+    title: req.body.title,
+    description: req.body.description ? req.body.description : null,
+    image_url: req.body.image_url ? req.body.image_url : null,
+    rating: (req.body.rating !== '0') ? parseInt(req.body.rating) : null,
+    location_id: req.session.user.location
+  };
+
+  const query = `INSERT INTO posts (user_id, title, description, image_url, rating, location_id)
+                        VALUES ($1, $2, $3, $4, $5, $6);`;
+
+  db.any(query, [
+      post_data.user_id, post_data.title, post_data.description,
+      post_data.image_url, post_data.rating, post_data.location_id
+    ])
+    .then(data => {
+      res.render('pages/home', {
+        message: 'Posted successfully!',
+        curUserID: req.session.user.user_id
+      });
+    })
+    .catch(err => {
+      res.render('pages/home', {
+        message: 'Failed to post. Please try again.',
+        error: true,
+        curUserID: req.session.user.user_id
+      });
+      console.log(err);
+    });
 });
 
 /* LOGOUT */

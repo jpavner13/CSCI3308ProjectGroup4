@@ -159,24 +159,21 @@
 </style>
 
 <main>
-  <div class="container">
+  <div class="container mt-3">
     <!-- THE REST OF YOUR HTML CODE GOES HERE -->
-    <% if (locals.message) { %>
-        <div
-          class="alert alert-<%- locals.error ? 'danger' : 'success' %>"
-          role="alert"
-        >
-          <%= message %>
-        </div>
-    <% } %>
+    <div class="row"><%- include ('../partials/message') %></div>
     
     <div>
-        <div>
+        <div class="row">
             <header>
                 <h1 class="header-1">Find Locals</h1>
             </header>
         </div>
-        <%- include ('../partials/searchBar.ejs') %>
+        <div class="row">
+          <div class="col">
+            <%- include ('../partials/searchBar.ejs') %>
+          </div>
+        </div>
     </div>
   </div>
 
@@ -199,7 +196,6 @@
                     <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="profile-image" class="profile"/>
                   </a>
                 </div>
-                                
                 <div class="card-content">
 
                   <!-- Add in phone number if its avaliable -->
