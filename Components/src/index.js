@@ -166,15 +166,21 @@ app.post('/login', async (req, res)=>{
     }
     else{
       console.log('Incorrect username or password')
-      res.redirect('/login'); // Redirect to the login page if credentials are wrong
+      res.render('pages/login', {
+        message: 'Incorrect username or password. Please try again.',
+        error: true
+      }); // Redirect to the login page if credentials are wrong
     }
 
   })
 
   // If the query failed redirect back to the login
   .catch(function (err){
-    res.redirect('/login');
-    return console.log('Incorrect username or password');
+    res.render('pages/login', {
+      message: 'Incorrect username or password. Please try again.',
+      error: true
+    });
+    console.log('Incorrect username or password');
   });
 });
 
