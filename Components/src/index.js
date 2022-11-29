@@ -81,6 +81,9 @@ app.post('/register', async (req, res)=>{
   var twitter = req.body.twitter ? req.body.twitter.replace('@','') : null;
   var phoneNum = req.body.phonenum ? req.body.phonenum : null;
   var facebook = req.body.facebook ? req.body.facebook : null;
+
+  var i = req.body.profilePic;
+  var profilePic = i || 'https://static1.housesforsale.com/v2.4.5/assets/img/unknown_user.png';
   
   // Hash the password before inserting
   var hash = await bcrypt.hash(req.body.password, 10);
@@ -100,9 +103,9 @@ app.post('/register', async (req, res)=>{
         // Input the new user data into the db
         var location_id = data.location_id
         return t.any(`INSERT INTO users (username, password, firstname, lastname, 
-          email, phone_num, twitter, facebook_url, location_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`,
+          email, profile_pic, phone_num, twitter, facebook_url, location_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`,
           [req.body.username, hash, req.body.firstname, req.body.lastname, 
-          req.body.email, phoneNum, twitter, facebook, location_id])
+          req.body.email, profilePic, phoneNum, twitter, facebook, location_id])
 
           // Inserting wasn't successful
           .catch(err => {

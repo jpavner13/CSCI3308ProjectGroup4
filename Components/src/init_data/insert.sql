@@ -55,11 +55,11 @@ INSERT INTO locations (loc_name, country) VALUES
 -- ie Nick's password is 'nick'
 
 -- Bare-bones user data
-INSERT INTO users (username, password, firstname, lastname, email, location_id) VALUES
-('jpavner13', '$2a$10$rLMki1oS19Aalt8el5D3A.Nmz.NWXcdUmWCkiPkrR2A3Q9FlKjhse', 'Pierce', 'Avner', 'jack.avner@colorado.edu', 6),
-('jithinrenji', '$2a$10$rdxlxq6meP4Weu35WXOGv.ttbWRTbqlVovgshS1zGIO/vR1vpEZPS', 'Jithin', 'Renji', 'jithin.renji@colorado.edu', 6),
-('keithbliss', '$2a$10$7XFmWZsS6tbiqUVNmdGqtOLI9TqC42/WCAZY8SFe7K4YWTApR5Oem', 'Keith', 'Bliss', 'keith.bliss@colorado.edu', 5);
+INSERT INTO users (username, password, firstname, lastname, email, profile_pic, location_id) VALUES
+('jpavner13', '$2a$10$rLMki1oS19Aalt8el5D3A.Nmz.NWXcdUmWCkiPkrR2A3Q9FlKjhse', 'Pierce', 'Avner', 'jack.avner@colorado.edu', 'https://static1.housesforsale.com/v2.4.5/assets/img/unknown_user.png', 6),
+('jithinrenji', '$2a$10$rdxlxq6meP4Weu35WXOGv.ttbWRTbqlVovgshS1zGIO/vR1vpEZPS', 'Jithin', 'Renji', 'jithin.renji@colorado.edu', 'https://static1.housesforsale.com/v2.4.5/assets/img/unknown_user.png',  6),
+('keithbliss', '$2a$10$7XFmWZsS6tbiqUVNmdGqtOLI9TqC42/WCAZY8SFe7K4YWTApR5Oem', 'Keith', 'Bliss', 'keith.bliss@colorado.edu', 'https://static1.housesforsale.com/v2.4.5/assets/img/unknown_user.png', 5);
 
 -- Full data insert
-INSERT INTO users (username, password, firstname, lastname, email, phone_num, twitter, facebook_url, location_id) VALUES
-('nick0connor', '$2a$10$.j4pqk3fykWZ0qcmk8CHbuJpovb9L2Bf4rb9V4DNQY2kwkS85LzHm', 'Nick', 'OConnor', 'nioc4468@colorado.edu', '314-320-5554', 'nick0connor', NULL, 25);
+INSERT INTO users (username, password, firstname, lastname, email, profile_pic, phone_num, twitter, facebook_url, location_id) VALUES
+('nick0connor', '$2a$10$.j4pqk3fykWZ0qcmk8CHbuJpovb9L2Bf4rb9V4DNQY2kwkS85LzHm', 'Nick', 'OConnor', 'nioc4468@colorado.edu', 'https://wallpapers.com/images/hd/cool-neon-blue-profile-picture-u9y9ydo971k9mdcf.jpg', '314-320-5554', 'nick0connor', NULL, 25);
