@@ -17,7 +17,7 @@ CREATE TABLE users(
   twitter VARCHAR(15),
   facebook_url VARCHAR(100),
   location_id INTEGER NOT NULL REFERENCES locations (location_id),
-  profile_pic VARCHAR(100)
+  profile_pic VARCHAR(300)
 );
 
 DROP TABLE IF EXISTS posts CASCADE;
