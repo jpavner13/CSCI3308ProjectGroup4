@@ -200,13 +200,13 @@ app.post('/login', async (req, res)=>{
 
 
 /* DEBUG CODE */
-app.get('/debug', (req, res)=>{
-  db.any("SELECT * FROM users;")
-  .then(function(data){
-    console.log(data);
-    res.send(data);
-  })
-});
+// app.get('/debug', (req, res)=>{
+//   db.any("SELECT * FROM users;")
+//   .then(function(data){
+//     console.log(data);
+//     res.send(data);
+//   })
+// });
 
 
 /* AUTHENTICATION MIDDLEWARE */
